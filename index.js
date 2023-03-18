@@ -20,8 +20,12 @@ app.get('/', (req,res) => {
     res.end();
 })
 
+const productsRoute = require('./routes/products.routes');
+
+
+app.use('/products', productsRoute)
+
 
 app.listen(PORT, () => {
     console.log('Server is listening on port'.green.bold, PORT);
 })
-
