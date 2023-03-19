@@ -21,3 +21,8 @@ exports.getAProductByIdService = async (id) => {
 
     return result;
 }
+
+exports.getTrendingProductsService = async () => {
+    const result = await Products.find({}).sort({views: -1}).limit(3);
+    return result;
+}

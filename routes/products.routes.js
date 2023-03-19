@@ -3,6 +3,9 @@ const router = express.Router();
 const productControllers = require('../controllers/products.controllers');
 
 
+router.route('/trending')
+.get(productControllers.getTrendingProducts)
+
 router.route('/')
 .get(productControllers.getAllProduct)
 .post(productControllers.createNewProduct)
