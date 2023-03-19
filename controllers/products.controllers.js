@@ -1,4 +1,10 @@
-const { getProductsService, createProductService, getAProductByIdService, getTrendingProductsService } = require("../services/products.services");
+const {
+    getProductsService,
+    createProductService,
+    getAProductByIdService,
+    getTrendingProductsService,
+    getCheapestProductsService
+} = require("../services/products.services");
 
 exports.getAllProduct = async (req, res) => {
     try {
@@ -47,25 +53,25 @@ exports.getAllProduct = async (req, res) => {
 
 exports.createNewProduct = async (req, res, next) => {
     try {
-      const result = await createProductService(req.body);
-      res.status(200).json({
-        status: "Success",
-        message: "Successfully created new product",
-        data: result,
-      });
+        const result = await createProductService(req.body);
+        res.status(200).json({
+            status: "Success",
+            message: "Successfully created new product",
+            data: result,
+        });
     } catch (error) {
-      res.status(400).json({
-        status: "Failed",
-        message: "Failed to create new product",
-        error: error.message,
-      });
+        res.status(400).json({
+            status: "Failed",
+            message: "Failed to create new product",
+            error: error.message,
+        });
     }
-  };
+};
 
 
-  exports.getAProductById = async (req, res) => {
+exports.getAProductById = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const result = await getAProductByIdService(id);
 
         res.status(200).json({
@@ -83,19 +89,37 @@ exports.createNewProduct = async (req, res, next) => {
 }
 
 exports.getTrendingProducts = async (req, res, next) => {
-  try {
-      const result = await getTrendingProductsService();
+    try {
+        const result = await getTrendingProductsService();
 
-      res.status(200).json({
-          statusbar: "Success",
-          message: "Successfully get the trending products",
-          data: result
-      })
-  } catch (error) {
-      res.status(400).json({
-          status: "Failed",
-          message: "Failed to get the Trending products",
-          error: error.message
-      })
-  }
+        res.status(200).json({
+            statusbar: "Success",
+            message: "Successfully get the trending products",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "Failed",
+            message: "Failed to get the Trending products",
+            error: error.message
+        })
+    }
+}
+
+exports.getCheapestProducts = async (req, res, next) => {
+    try {
+        const result = await getCheapestProductsService();
+
+        res.status(200).json({
+            statusbar: "Success",
+            message: "Successfully get the cheapest products",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "Failed",
+            message: "Failed to get the cheapest products",
+            error: error.message
+        })
+    }
 }
