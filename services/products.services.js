@@ -9,3 +9,8 @@ exports.getProductsService = async (filter, queries) => {
     return result;
 }
 
+exports.createProductService = async (data) => {
+    const result = await Products.create(data);
+
+    return result;
+}
