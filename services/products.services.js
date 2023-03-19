@@ -14,3 +14,10 @@ exports.createProductService = async (data) => {
 
     return result;
 }
+
+exports.getAProductByIdService = async (id) => {
+    const newViews = await Products.updateOne({_id: id}, {$inc: {views: 1}});
+    const result = await Products.findById({_id: id});
+
+    return result;
+}

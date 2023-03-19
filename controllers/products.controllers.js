@@ -1,4 +1,4 @@
-const { getProductsService, createProductService } = require("../services/products.services");
+const { getProductsService, createProductService, getAProductByIdService } = require("../services/products.services");
 
 exports.getAllProduct = async (req, res) => {
     try {
@@ -61,3 +61,23 @@ exports.createNewProduct = async (req, res, next) => {
       });
     }
   };
+
+
+  exports.getAProductById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const result = await getAProductByIdService(id);
+
+        res.status(200).json({
+            status: "Success",
+            message: "Successfully get the product",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "Failed",
+            message: "Failed to get the product.",
+            error: error.message
+        })
+    }
+}
